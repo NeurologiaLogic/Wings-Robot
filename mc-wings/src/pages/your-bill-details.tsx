@@ -5,10 +5,10 @@ import BillCard from "../component/bill-card.tsx";
 export default function YourBillDetails() {
   const getProductInCart = useFoodStore((state) => state.getProductInCart);
   const [productInCart,setProductInCart] =  useState(getProductInCart())
-  const removeFoodFromCart = useFoodStore((state) => state.removeFoodFromCart);
+  const removeProductFromCart = useFoodStore((state) => state.removeProductFromCart);
   useEffect(() => {
     // Update cart count whenever it changes in the store
-    const unsubscribe = useFoodStore.subscribe((state,prevState)=>{
+    const unsubscribe = useFoodStore.subscribe((state,)=>{
       setProductInCart(state.getProductInCart());
     })
 
@@ -18,17 +18,17 @@ export default function YourBillDetails() {
     };
   }, []);
   return (
-    <div className="mx-4 sm:mx-auto max-w-screen-md h-screen">
+    <div className="mx-4 max-w-screen-md min-h-screen px-24">
       <div className="my-5">
         <h1 className="font-bold text-4xl text-left">Your</h1>
         <h1 className="font-bold text-4xl text-left">Bill Details</h1>
       </div>
-
       <div>
         {productInCart.map((food, index) => (
-          <BillCard key={index} item={food} remove={() => removeFoodFromCart(food.id)} />
+          <BillCard key={index} item={food} remove={() => removeProductFromCart(food.id)} />
         ))}
       </div>
+      <div className="h-[256px]"></div>
     </div>
   );
 }

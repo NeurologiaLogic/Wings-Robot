@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronLeftSquare, Home, ShoppingCart } from "lucide-react";
+import { ChevronLeft, Home, ShoppingCart } from "lucide-react";
 import { useFoodStore } from "../../store/food-store"
 import { Link, useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export default function Footer({next}: {next: string}) {
   
   useEffect(() => {
     // Update cart count whenever it changes in the store
-    const unsubscribe = useFoodStore.subscribe((state,prevState)=>{
+    const unsubscribe = useFoodStore.subscribe((state,)=>{
       setCartCount(state.getProductInCartCount());
     })
 
@@ -20,13 +20,13 @@ export default function Footer({next}: {next: string}) {
     };
   }, []);
 
-  const links = [
-    { text: "Select Flavour", path: "/select-flavour-page" },
-    { text: "Your Bill Details", path: "/your-bill-details" },
-    { text: "Continue to Payment", path: "/continue-to-payment" },
-    { text: "Choose Your Payment Method", path: "/choose-your-payment-method" },
-    { text: "Order on Progress", path: "/order-on-progress" },
-  ];
+  // const links = [
+  //   { text: "Select Flavour", path: "/select-flavour-page" },
+  //   { text: "Your Bill Details", path: "/your-bill-details" },
+  //   { text: "Continue to Payment", path: "/continue-to-payment" },
+  //   { text: "Choose Your Payment Method", path: "/choose-your-payment-method" },
+  //   { text: "Order on Progress", path: "/order-on-progress" },
+  // ];
 
   return (
     <div className="fixed bottom-0 h-24 flex bg-white w-full items-center justify-evenly">
@@ -40,7 +40,9 @@ export default function Footer({next}: {next: string}) {
           <div className="absolute -right-3 -top-2 bullet bg-[#bc1c2c] w-5 h-5 flex items-center justify-center">
             <p>{cartCount}</p>
           </div>
-          <ShoppingCart color="black" size={40}/>
+          <Link to="/your-bill-details">
+            <ShoppingCart color="black" size={40}/>
+          </Link>
         </div>
       </div>
       <div>
@@ -50,7 +52,7 @@ export default function Footer({next}: {next: string}) {
             </Link>
           ))} */}
         <Link to={next}>
-          <button className="p-3 bg-gray-400 color-black rounded-sm">Continue</button>
+          <button className="p-3 bg-[#24a4a4] color-black rounded-sm">Continue</button>
         </Link>
       </div>
     </div>

@@ -1,17 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFoodStore } from "../../store/food-store.ts";
-import FoodCard from "../component/food-card.tsx";
+import { calculatePrice } from "../utils/calculate-price.ts";
 
-export default function OrderOnProgress() {
+type Props ={
+  finish:string
+}
+
+export default function OrderOnProgress({finish}:Props) {
   const getProductInCart = useFoodStore((state) => state.getProductInCart);
   const navigate = useNavigate();
+  const formatedPrice = calculatePrice(getProductInCart())
   return (
-    <div className="mx-auto max-w-screen-lg h-screen bg-[#bc1c2c] pt-20">
+    <div className="mx-auto w-full h-screen bg-[#bc1c2c] pt-20">
       <div className="text-center my-5">
         <h1 className="font-bold text-4xl">Your Order</h1>
         <h1 className="font-bold text-4xl">is on Progress</h1>
       </div>
-      <div className="receipt mx-auto max-w-md md:w-3/4 lg:w-1/2">
+      <div className="receipt mx-auto w-xs sm:max-w-md md:w-3/4 lg:w-1/2">
         <div className="receipt-container bg-white p-5 rounded-xl ">
             <div className="transaction flex flex-col gap-3">
             <div className="headings text-center">
@@ -44,11 +49,13 @@ export default function OrderOnProgress() {
             <div className="transaction-details mt-4 flex flex-col gap-2">
             <div className="flex justify-between">
                 <span className="font-bold text-black">Subtotal:</span>
-                <span className="font-bold text-black">Rp. 22.000</span>
+                <span className="font-bold text-black">{formatedPrice}</span>
             </div>
-            <p className="font-bold text-black">Payment Method:</p>
-            <p className="text-black">Gopay</p>
-            <button className="w-full bg-[#24a4a4] rounded-md p-2">Finish</button>
+            {/* <p className="font-bold text-black">Payment Method:</p>
+            <p className="text-black">Gopay</p> */}
+            <Link to={finish}>
+              <button className="w-full bg-[#24a4a4] rounded-md p-2">Finish</button>
+            </Link>
             </div>
         </div>
         <div className="button-container flex flex-end mt-4">

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useFoodStore } from "../../store/food-store.ts";
-import PaymentMethodCard from "../component/payment-method-card.tsx";
+// import { useFoodStore } from "../../../store/food-store.ts";
+import PaymentMethodCard from "../../component/payment-method-card.tsx";
 
 export default function ChooseYourPaymentMethod() {
   const paymentMethods = [
@@ -12,7 +12,7 @@ export default function ChooseYourPaymentMethod() {
   const navigate = useNavigate();
 
   return (
-    <div className="p-4 sm:px-auto h-screen bg-[#bc1c2c]">
+    <div className="p-4 sm:px-auto h-screen bg-[#bc1c2c] px-24">
       <div className="text-left my-5">
         <h3 className="font-semibold text-2xl">Choose Your</h3>
         <h1 className="font-bold text-4xl">Payment Method</h1>
